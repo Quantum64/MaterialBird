@@ -1,6 +1,7 @@
 package co.q64.materialbird.framework;
 
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public interface Graphics {
@@ -9,6 +10,8 @@ public interface Graphics {
 	}
 
 	public Image newImage(String fileName, ImageFormat format);
+	
+	public Canvas getCanvas();
 
 	public void clearScreen(int color);
 

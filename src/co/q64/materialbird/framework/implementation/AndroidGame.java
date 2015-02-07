@@ -105,7 +105,10 @@ public abstract class AndroidGame extends Activity implements Game {
 	}
 
 	public Screen getCurrentScreen() {
-
 		return screen;
+	}
+
+	public Context getContext() {
+		return this.getApplicationContext();
 	}
 }

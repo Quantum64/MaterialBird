@@ -13,7 +13,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import co.q64.materialbird.framework.Graphics;
-import co.q64.materialbird.framework.Graphics.ImageFormat;
 import co.q64.materialbird.framework.Image;
 
 public class AndroidGraphics implements Graphics {
@@ -145,5 +144,9 @@ public class AndroidGraphics implements Graphics {
 	@Override
 	public int getHeight() {
 		return frameBuffer.getHeight();
+	}
+
+	public Canvas getCanvas() {
+		return canvas;
 	}
 }
