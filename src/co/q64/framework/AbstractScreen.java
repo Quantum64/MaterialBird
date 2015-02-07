@@ -1,4 +1,4 @@
-package co.q64.engine;
+package co.q64.framework;
 
 public abstract class Screen {
     protected final Game game;
