@@ -1,42 +1,35 @@
 package co.q64.materialbird.game.screens;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.Rect;
 import co.q64.materialbird.framework.Game;
 import co.q64.materialbird.framework.Screen;
-import co.q64.materialbird.game.material.elements.MaterialLoader;
-import co.q64.materialbird.game.material.util.MaterialShadow;
+import co.q64.materialbird.game.material.MaterialPane2D;
+import co.q64.materialbird.game.material.elements.MaterialCircle;
+import co.q64.materialbird.game.objects.DynamicElement;
 
 public class MainScreen extends Screen {
 
-	MaterialLoader loader;
+	MaterialPane2D pane;
 
 	public MainScreen(Game game) {
 		super(game);
-		loader = new MaterialLoader(game.getContext());
+		pane = new MaterialPane2D();
+		MaterialCircle c = new MaterialCircle();
+		c.setColor(Color.GREEN);
+		c.setRadius(50);
+		pane.addElement(new DynamicElement("test_c1", c, 300, 100, 0));
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		// TODO Auto-generated method stub
-
+		pane.move(1, 0);
 	}
 
 	@Override
 	public void paint(float deltaTime) {
-		game.getGraphics().drawRect(0, 0, 1281, 1281, Color.WHITE);
-		// loader.render(game.getGraphics().getCanvas());
-		Bitmap bitmap = Bitmap.createBitmap(game.getGraphics().getCanvas().getWidth(), game.getGraphics().getCanvas().getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas temp = new Canvas(bitmap);
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setColor(Color.RED);
-		temp.drawCircle(100, 100, 100, paint);
-		MaterialShadow ms = new MaterialShadow(6, Color.BLACK, 0.5f, 5, -Math.PI / 4);
-		game.getGraphics().getCanvas().drawBitmap(ms.createDropShadow(bitmap), 100, 100, null);
-		game.getGraphics().getCanvas().drawBitmap(bitmap, 100, 100, null);
+		game.getGraphics().drawRect(0, 0, 2000, 2000, Color.WHITE);
+		pane.render(game.getGraphics().getCanvas());
 	}
 
 	@Override

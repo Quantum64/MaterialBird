@@ -18,7 +18,7 @@ public class MaterialPane2D extends ContentPane2D {
 			element.getObject().render(rendered);
 			MaterialShadow shadow = new MaterialShadow();
 			Bitmap bakedShadow = shadow.createDropShadow(bitmap);
-			canvas.drawBitmap(bakedShadow, 0, 0, null);
+			canvas.drawBitmap(bakedShadow, x, y, null);
 			canvas.drawBitmap(bitmap, x, y, null);
 		}
 	}
