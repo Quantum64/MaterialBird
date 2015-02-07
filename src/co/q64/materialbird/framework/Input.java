@@ -1,8 +1,8 @@
-package co.q64.framework;
+package co.q64.materialbird.framework;
 
 import java.util.List;
 
-public interface IInput {
+public interface Input {
     
     public static class TouchEvent {
         public static final int TOUCH_DOWN = 0;
@@ -25,3 +25,4 @@ public interface IInput {
 
     public List<TouchEvent> getTouchEvents();
 }
+ 

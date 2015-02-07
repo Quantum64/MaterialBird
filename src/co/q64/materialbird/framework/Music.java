@@ -1,6 +1,6 @@
-package co.q64.framework;
+package co.q64.materialbird.framework;
 
-public interface IMusic {
+public interface Music {
     public void play();
 
     public void stop();
@@ -19,5 +19,5 @@ public interface IMusic {
 
     public void dispose();
 
-    void seekBegin();
+	void seekBegin();
 }

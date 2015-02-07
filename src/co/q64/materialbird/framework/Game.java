@@ -1,7 +1,7 @@
-package co.q64.framework;
+package co.q64.materialbird.framework;
 
+public interface Game {
 
-public interface IGame {
     public Audio getAudio();
 
     public Input getInput();
