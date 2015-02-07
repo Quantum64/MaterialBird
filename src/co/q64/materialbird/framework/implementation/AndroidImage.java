@@ -5,31 +5,31 @@ import co.q64.materialbird.framework.Graphics.ImageFormat;
 import co.q64.materialbird.framework.Image;
 
 public class AndroidImage implements Image {
-    Bitmap bitmap;
-    ImageFormat format;
-    
-    public AndroidImage(Bitmap bitmap, ImageFormat format) {
-        this.bitmap = bitmap;
-        this.format = format;
-    }
+	Bitmap bitmap;
+	ImageFormat format;
 
-    @Override
-    public int getWidth() {
-        return bitmap.getWidth();
-    }
+	public AndroidImage(Bitmap bitmap, ImageFormat format) {
+		this.bitmap = bitmap;
+		this.format = format;
+	}
 
-    @Override
-    public int getHeight() {
-        return bitmap.getHeight();
-    }
+	@Override
+	public int getWidth() {
+		return bitmap.getWidth();
+	}
 
-    @Override
-    public ImageFormat getFormat() {
-        return format;
-    }
+	@Override
+	public int getHeight() {
+		return bitmap.getHeight();
+	}
 
-    @Override
-    public void dispose() {
-        bitmap.recycle();
-    }      
+	@Override
+	public ImageFormat getFormat() {
+		return format;
+	}
+
+	@Override
+	public void dispose() {
+		bitmap.recycle();
+	}
 }
