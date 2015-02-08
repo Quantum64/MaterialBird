@@ -12,6 +12,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class AndroidFastRenderView extends SurfaceView implements Runnable {
+	
+	private final Paint AA = new Paint();
+	
 	AndroidGame game;
 	Bitmap framebuffer;
 	Thread renderThread = null;
@@ -25,6 +28,8 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
 		this.game = game;
 		this.framebuffer = framebuffer;
 		this.holder = getHolder();
+		//this.AA.setFlags(Paint.ANTI_ALIAS_FLAG);
+		//this.AA.setFilterBitmap(true);
 
 		TimerTask updateFPS = new TimerTask() {
 			public void run() {
@@ -57,7 +62,7 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
 			startTime = System.nanoTime();
 
 			if (deltaTime > 3.15) {
-				deltaTime = (float) 3.15;
+				deltaTime = (float) 3.15; 
 			}
 
 			game.getCurrentScreen().update(deltaTime);
@@ -65,11 +70,11 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
 
 			Canvas canvas = holder.lockCanvas();
 			canvas.getClipBounds(dstRect);
-			canvas.drawBitmap(framebuffer, null, dstRect, null);
+			canvas.drawBitmap(framebuffer, null, dstRect, AA);
 			Paint paint = new Paint();
 			paint.setColor(Color.RED);
-			paint.setTextSize(20);
-			canvas.drawText("FPS: " + fps, 10, 30, paint);
+			paint.setTextSize(40);
+			canvas.drawText("FPS: " + fps, 100, 100, paint);
 			holder.unlockCanvasAndPost(canvas);
 			frames++;
 		}

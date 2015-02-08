@@ -14,12 +14,21 @@ import co.q64.materialbird.game.objects.DynamicElement;
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class ContentPane2D implements Renderable {
 
+	private int xOffset;
+	private int yOffset;
+	private int width;
+	private int height;
+
 	private int camX;
 	private int camY;
 
 	private List<DynamicElement> elements;
 
-	public ContentPane2D() {
+	public ContentPane2D(int x, int y, int width, int height) {
+		this.xOffset = x;
+		this.yOffset = y;
+		this.width = width;
+		this.height = height;
 		this.camX = 0;
 		this.camY = 0;
 		this.elements = new ArrayList<DynamicElement>();
@@ -92,11 +101,27 @@ public class ContentPane2D implements Renderable {
 		camY = camY + y;
 	}
 
+	public int getXOffset() {
+		return xOffset;
+	}
+
+	public int getYOffset() {
+		return yOffset;
+	}
+
 	public int getX() {
 		return camX;
 	}
 
 	public int getY() {
 		return camY;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 }

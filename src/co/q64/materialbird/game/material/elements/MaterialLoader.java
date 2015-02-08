@@ -15,8 +15,8 @@ import co.q64.materialbird.game.material.interfaces.Renderable;
 
 public class MaterialLoader extends MaterialBase implements MaterialElement, Renderable {
 
-	public MaterialLoader(Context context) {
-		super(context);
+	public MaterialLoader(Context context, int x, int y, int width, int height) {
+		super(context, x, y, width, height);
 	}
 
 	int width = 100;
@@ -136,21 +136,5 @@ public class MaterialLoader extends MaterialBase implements MaterialElement, Ren
 	// Set color of background
 	public void setBackgroundColor(int color) {
 		this.backgroundColor = color;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 }
