@@ -9,7 +9,7 @@ import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build;
-import co.q64.materialbird.game.material.interfaces.Renderable;
+import co.q64.materialbird.engine.component.interfaces.Renderable;
 import co.q64.materialbird.game.objects.DynamicElement;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)

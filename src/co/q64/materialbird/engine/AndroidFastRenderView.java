@@ -3,11 +3,15 @@ package co.q64.materialbird.engine;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.view.SurfaceHolder;
 
@@ -26,7 +30,6 @@ public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceVie
 	public AndroidFastRenderView(AndroidGame game, Bitmap framebuffer) {
 		super(game);
 		this.game = game;
-		this.framebuffer = framebuffer;
 		this.holder = getHolder();
 
 		TimerTask updateFPS = new TimerTask() {
@@ -44,6 +47,19 @@ public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceVie
 	public void resume() {
 		running = true;
 		renderThread.start();
+	}
+	
+	public void pause() {
+		running = false;
+		while (true) {
+			try {
+				renderThread.join();
+				break;
+			} catch (InterruptedException e) {
+				// retry
+			}
+
+		}
 	}
 
 	public void run() {
@@ -77,17 +93,19 @@ public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceVie
 		}
 	}
 
-	public void pause() {
-		running = false;
-		while (true) {
-			try {
-				renderThread.join();
-				break;
-			} catch (InterruptedException e) {
-				// retry
-			}
+	@Override
+	public void onSurfaceCreated(GL10 ignored, EGLConfig config) {
+		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	}
 
-		}
+	@Override
+	public void onSurfaceChanged(GL10 ignored, int width, int height) {
+		GLES20.glViewport(0, 0, width, height);
+	}
+
+	@Override
+	public void onDrawFrame(GL10 ignored) {
+		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 	}
 
 }
