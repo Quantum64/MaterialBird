@@ -1,13 +1,13 @@
 package co.q64.materialbird.game;
 
-import co.q64.materialbird.engine.AndroidGame;
-import co.q64.materialbird.engine.interfaces.Screen;
+import co.q64.materialbird.engine.Game;
+import co.q64.materialbird.engine.interfaces.IScreen;
 import co.q64.materialbird.game.screens.MainScreen;
 
-public class MaterialBird extends AndroidGame {
+public class MaterialBird extends Game {
 
 	@Override
-	public Screen getInitScreen() {
+	public IScreen getInitScreen() {
 		return new MainScreen(this);
 	}
 	

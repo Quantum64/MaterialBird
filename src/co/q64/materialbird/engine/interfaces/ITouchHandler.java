@@ -1,11 +1,11 @@
-package co.q64.materialbird.engine;
+package co.q64.materialbird.engine.interfaces;
 
 import java.util.List;
 
+import co.q64.materialbird.engine.interfaces.IInput.TouchEvent;
 import android.view.View.OnTouchListener;
-import co.q64.materialbird.engine.interfaces.Input.TouchEvent;
 
-public interface TouchHandler extends OnTouchListener {
+public interface ITouchHandler extends OnTouchListener {
 	public boolean isTouchDown(int pointer);
 
 	public int getTouchX(int pointer);

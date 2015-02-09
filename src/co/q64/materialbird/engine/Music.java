@@ -8,13 +8,13 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
-import co.q64.materialbird.engine.interfaces.Music;
+import co.q64.materialbird.engine.interfaces.IMusic;
 
-public class AndroidMusic implements Music, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
+public class Music implements IMusic, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
 	MediaPlayer mediaPlayer;
 	boolean isPrepared = false;
 
-	public AndroidMusic(AssetFileDescriptor assetDescriptor) {
+	public Music(AssetFileDescriptor assetDescriptor) {
 		mediaPlayer = new MediaPlayer();
 		try {
 			mediaPlayer.setDataSource(assetDescriptor.getFileDescriptor(), assetDescriptor.getStartOffset(), assetDescriptor.getLength());

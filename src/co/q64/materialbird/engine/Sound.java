@@ -1,13 +1,13 @@
 package co.q64.materialbird.engine;
 
 import android.media.SoundPool;
-import co.q64.materialbird.engine.interfaces.Sound;
+import co.q64.materialbird.engine.interfaces.ISound;
 
-public class AndroidSound implements Sound {
+public class Sound implements ISound {
 	int soundId;
 	SoundPool soundPool;
 
-	public AndroidSound(SoundPool soundPool, int soundId) {
+	public Sound(SoundPool soundPool, int soundId) {
 		this.soundId = soundId;
 		this.soundPool = soundPool;
 	}

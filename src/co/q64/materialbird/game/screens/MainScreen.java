@@ -3,17 +3,17 @@ package co.q64.materialbird.game.screens;
 import java.util.Random;
 
 import android.graphics.Color;
-import co.q64.materialbird.engine.interfaces.Game;
-import co.q64.materialbird.engine.interfaces.Screen;
+import co.q64.materialbird.engine.interfaces.IGame;
+import co.q64.materialbird.engine.interfaces.IScreen;
 import co.q64.materialbird.game.material.MaterialPane2D;
 import co.q64.materialbird.game.material.elements.MaterialCircle;
 import co.q64.materialbird.game.objects.DynamicElement;
 
-public class MainScreen extends Screen {
+public class MainScreen extends IScreen {
 
 	MaterialPane2D pane;
 
-	public MainScreen(Game game) {
+	public MainScreen(IGame game) {
 		super(game);
 		pane = new MaterialPane2D(0, 0, game.getGraphics().getCanvas().getWidth(), game.getGraphics().getCanvas().getHeight());
 		Random r = new Random();

@@ -15,11 +15,11 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.view.SurfaceHolder;
 
-public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceView.Renderer {
+public class GLRenderView extends GLSurfaceView implements GLSurfaceView.Renderer {
 	
 	private final Paint AA = new Paint();
 	
-	AndroidGame game;
+	Game game;
 	Bitmap framebuffer;
 	Thread renderThread = null;
 	SurfaceHolder holder;
@@ -27,7 +27,7 @@ public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceVie
 	int frames = 0;
 	int fps = 0;
 
-	public AndroidFastRenderView(AndroidGame game, Bitmap framebuffer) {
+	public GLRenderView(Game game, Bitmap framebuffer) {
 		super(game);
 		this.game = game;
 		this.holder = getHolder();

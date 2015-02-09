@@ -1,6 +1,6 @@
 package co.q64.materialbird.engine.interfaces;
 
-public interface Music {
+public interface IMusic {
     public void play();
 
     public void stop();

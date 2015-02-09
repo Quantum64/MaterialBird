@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 import android.content.SharedPreferences;
 
-public interface FileIO {
+public interface IFileIO {
     public InputStream readFile(String file) throws IOException;
 
     public OutputStream writeFile(String file) throws IOException;

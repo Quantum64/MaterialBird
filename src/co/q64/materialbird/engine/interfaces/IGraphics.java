@@ -4,12 +4,12 @@ package co.q64.materialbird.engine.interfaces;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public interface Graphics {
+public interface IGraphics {
 	public static enum ImageFormat {
 		ARGB8888, ARGB4444, RGB565
 	}
 
-	public Image newImage(String fileName, ImageFormat format);
+	public IImage newImage(String fileName, ImageFormat format);
 	
 	public Canvas getCanvas();
 
@@ -19,10 +19,10 @@ public interface Graphics {
 
 	public void drawRect(int x, int y, int width, int height, int color);
 
-	public void drawImage(Image image, int x, int y, int srcX, int srcY,
+	public void drawImage(IImage image, int x, int y, int srcX, int srcY,
 			int srcWidth, int srcHeight);
 
-	public void drawImage(Image Image, int x, int y);
+	public void drawImage(IImage Image, int x, int y);
 
 	void drawString(String text, int x, int y, Paint paint);
 

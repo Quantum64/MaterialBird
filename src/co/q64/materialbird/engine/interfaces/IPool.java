@@ -3,7 +3,7 @@ package co.q64.materialbird.engine.interfaces;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pool<T> {
+public class IPool<T> {
     public interface PoolObjectFactory<T> {
         public T createObject();
     }
@@ -12,7 +12,7 @@ public class Pool<T> {
     private final PoolObjectFactory<T> factory;
     private final int maxSize;
 
-    public Pool(PoolObjectFactory<T> factory, int maxSize) {
+    public IPool(PoolObjectFactory<T> factory, int maxSize) {
         this.factory = factory;
         this.maxSize = maxSize;
         this.freeObjects = new ArrayList<T>(maxSize);

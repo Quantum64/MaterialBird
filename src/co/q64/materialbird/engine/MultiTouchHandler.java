@@ -5,18 +5,19 @@ import java.util.List;
 
 import android.view.MotionEvent;
 import android.view.View;
-import co.q64.materialbird.engine.interfaces.Pool;
-import co.q64.materialbird.engine.interfaces.Input.TouchEvent;
-import co.q64.materialbird.engine.interfaces.Pool.PoolObjectFactory;
+import co.q64.materialbird.engine.interfaces.IPool;
+import co.q64.materialbird.engine.interfaces.ITouchHandler;
+import co.q64.materialbird.engine.interfaces.IInput.TouchEvent;
+import co.q64.materialbird.engine.interfaces.IPool.PoolObjectFactory;
 
-public class MultiTouchHandler implements TouchHandler {
+public class MultiTouchHandler implements ITouchHandler {
 	private static final int MAX_TOUCHPOINTS = 10;
 
 	boolean[] isTouched = new boolean[MAX_TOUCHPOINTS];
 	int[] touchX = new int[MAX_TOUCHPOINTS];
 	int[] touchY = new int[MAX_TOUCHPOINTS];
 	int[] id = new int[MAX_TOUCHPOINTS];
-	Pool<TouchEvent> touchEventPool;
+	IPool<TouchEvent> touchEventPool;
 	List<TouchEvent> touchEvents = new ArrayList<TouchEvent>();
 	List<TouchEvent> touchEventsBuffer = new ArrayList<TouchEvent>();
 	float scaleX;
@@ -29,7 +30,7 @@ public class MultiTouchHandler implements TouchHandler {
 				return new TouchEvent();
 			}
 		};
-		touchEventPool = new Pool<TouchEvent>(factory, 100);
+		touchEventPool = new IPool<TouchEvent>(factory, 100);
 		view.setOnTouchListener(this);
 
 		this.scaleX = scaleX;

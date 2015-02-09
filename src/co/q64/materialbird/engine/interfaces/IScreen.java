@@ -2,10 +2,10 @@ package co.q64.materialbird.engine.interfaces;
 
 import android.content.Context;
 
-public abstract class Screen {
-	protected final Game game;
+public abstract class IScreen {
+	protected final IGame game;
 
-	public Screen(Game game) {
+	public IScreen(IGame game) {
 		this.game = game;
 	}
 

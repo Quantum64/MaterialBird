@@ -12,14 +12,14 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import co.q64.materialbird.engine.interfaces.FileIO;
+import co.q64.materialbird.engine.interfaces.IFileIO;
 
-public class AndroidFileIO implements FileIO {
+public class FileIO implements IFileIO {
 	Context context;
 	AssetManager assets;
 	String externalStoragePath;
 
-	public AndroidFileIO(Context context) {
+	public FileIO(Context context) {
 		this.context = context;
 		this.assets = context.getAssets();
 		this.externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;

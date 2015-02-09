@@ -5,13 +5,14 @@ import java.util.List;
 import android.content.Context;
 import android.os.Build.VERSION;
 import android.view.View;
-import co.q64.materialbird.engine.interfaces.Input;
-import co.q64.materialbird.engine.interfaces.Input.TouchEvent;
+import co.q64.materialbird.engine.interfaces.IInput;
+import co.q64.materialbird.engine.interfaces.ITouchHandler;
+import co.q64.materialbird.engine.interfaces.IInput.TouchEvent;
 
-public class AndroidInput implements Input {
-	TouchHandler touchHandler;
+public class Input implements IInput {
+	ITouchHandler touchHandler;
 
-	public AndroidInput(Context context, View view, float scaleX, float scaleY) {
+	public Input(Context context, View view, float scaleX, float scaleY) {
 		if (Integer.parseInt(VERSION.SDK) < 5)
 			touchHandler = new SingleTouchHandler(view, scaleX, scaleY);
 		else

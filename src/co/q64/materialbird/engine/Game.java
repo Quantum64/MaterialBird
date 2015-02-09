@@ -10,20 +10,20 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
-import co.q64.materialbird.engine.interfaces.Audio;
-import co.q64.materialbird.engine.interfaces.FileIO;
-import co.q64.materialbird.engine.interfaces.Game;
-import co.q64.materialbird.engine.interfaces.Graphics;
-import co.q64.materialbird.engine.interfaces.Input;
-import co.q64.materialbird.engine.interfaces.Screen;
+import co.q64.materialbird.engine.interfaces.IAudio;
+import co.q64.materialbird.engine.interfaces.IFileIO;
+import co.q64.materialbird.engine.interfaces.IGame;
+import co.q64.materialbird.engine.interfaces.IGraphics;
+import co.q64.materialbird.engine.interfaces.IInput;
+import co.q64.materialbird.engine.interfaces.IScreen;
 
-public abstract class AndroidGame extends Activity implements Game {
-	AndroidFastRenderView renderView;
-	Graphics graphics;
-	Audio audio;
-	Input input;
-	FileIO fileIO;
-	Screen screen;
+public abstract class Game extends Activity implements IGame {
+	GLRenderView renderView;
+	IGraphics graphics;
+	IAudio audio;
+	IInput input;
+	IFileIO fileIO;
+	IScreen screen;
 	WakeLock wakeLock;
 
 	@Override
@@ -41,11 +41,11 @@ public abstract class AndroidGame extends Activity implements Game {
 		float scaleX = (float) frameBufferWidth / getWindowManager().getDefaultDisplay().getWidth();
 		float scaleY = (float) frameBufferHeight / getWindowManager().getDefaultDisplay().getHeight();
 
-		renderView = new AndroidFastRenderView(this, frameBuffer);
-		graphics = new AndroidGraphics(getAssets(), frameBuffer);
-		fileIO = new AndroidFileIO(this);
-		audio = new AndroidAudio(this);
-		input = new AndroidInput(this, renderView, scaleX, scaleY);
+		renderView = new GLRenderView(this, frameBuffer);
+		graphics = new Graphics(getAssets(), frameBuffer);
+		fileIO = new FileIO(this);
+		audio = new Audio(this);
+		input = new Input(this, renderView, scaleX, scaleY);
 		screen = getInitScreen();
 		setContentView(renderView);
 
@@ -73,27 +73,27 @@ public abstract class AndroidGame extends Activity implements Game {
 	}
 
 	@Override
-	public Input getInput() {
+	public IInput getInput() {
 		return input;
 	}
 
 	@Override
-	public FileIO getFileIO() {
+	public IFileIO getFileIO() {
 		return fileIO;
 	}
 
 	@Override
-	public Graphics getGraphics() {
+	public IGraphics getGraphics() {
 		return graphics;
 	}
 
 	@Override
-	public Audio getAudio() {
+	public IAudio getAudio() {
 		return audio;
 	}
 
 	@Override
-	public void setScreen(Screen screen) {
+	public void setScreen(IScreen screen) {
 		if (screen == null)
 			throw new IllegalArgumentException("Screen must not be null");
 
@@ -104,7 +104,7 @@ public abstract class AndroidGame extends Activity implements Game {
 		this.screen = screen;
 	}
 
-	public Screen getCurrentScreen() {
+	public IScreen getCurrentScreen() {
 		return screen;
 	}
 

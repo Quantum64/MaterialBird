@@ -2,7 +2,7 @@ package co.q64.materialbird.engine.interfaces;
 
 import java.util.List;
 
-public interface Input {
+public interface IInput {
     
     public static class TouchEvent {
         public static final int TOUCH_DOWN = 0;
