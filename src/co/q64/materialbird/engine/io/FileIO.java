@@ -1,4 +1,4 @@
-package co.q64.materialbird.engine;
+package co.q64.materialbird.engine.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,15 +15,14 @@ import android.preference.PreferenceManager;
 import co.q64.materialbird.engine.interfaces.IFileIO;
 
 public class FileIO implements IFileIO {
-	Context context;
-	AssetManager assets;
-	String externalStoragePath;
+	private Context context;
+	private AssetManager assets;
+	private String externalStoragePath;
 
-	public FileIO(Context context) {
+	protected FileIO(Context context) {
 		this.context = context;
 		this.assets = context.getAssets();
 		this.externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
-
 	}
 
 	@Override

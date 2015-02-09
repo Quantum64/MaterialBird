@@ -22,7 +22,6 @@ public abstract class Game extends Activity implements IGame {
 	IGraphics graphics;
 	IAudio audio;
 	IInput input;
-	IFileIO fileIO;
 	IScreen screen;
 	WakeLock wakeLock;
 
@@ -43,12 +42,14 @@ public abstract class Game extends Activity implements IGame {
 
 		renderView = new GLRenderView(this, frameBuffer);
 		graphics = new Graphics(getAssets(), frameBuffer);
-		fileIO = new FileIO(this);
 		audio = new Audio(this);
 		input = new Input(this, renderView, scaleX, scaleY);
 		screen = getInitScreen();
 		setContentView(renderView);
+		aquireWakelock();
+	}
 
+	private void aquireWakelock() {
 		PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "MyGame");
 	}
@@ -75,11 +76,6 @@ public abstract class Game extends Activity implements IGame {
 	@Override
 	public IInput getInput() {
 		return input;
-	}
-
-	@Override
-	public IFileIO getFileIO() {
-		return fileIO;
 	}
 
 	@Override
