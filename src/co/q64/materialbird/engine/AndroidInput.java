@@ -1,12 +1,12 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import java.util.List;
 
 import android.content.Context;
 import android.os.Build.VERSION;
 import android.view.View;
-import co.q64.materialbird.framework.Input;
-import co.q64.materialbird.framework.Input.TouchEvent;
+import co.q64.materialbird.engine.interfaces.Input;
+import co.q64.materialbird.engine.interfaces.Input.TouchEvent;
 
 public class AndroidInput implements Input {
 	TouchHandler touchHandler;

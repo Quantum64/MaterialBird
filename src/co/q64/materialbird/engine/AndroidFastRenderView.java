@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,10 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.opengl.GLSurfaceView;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 
-public class AndroidFastRenderView extends SurfaceView implements Runnable {
+public class AndroidFastRenderView extends GLSurfaceView implements GLSurfaceView.Renderer {
 	
 	private final Paint AA = new Paint();
 	
@@ -28,8 +28,6 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
 		this.game = game;
 		this.framebuffer = framebuffer;
 		this.holder = getHolder();
-		//this.AA.setFlags(Paint.ANTI_ALIAS_FLAG);
-		//this.AA.setFilterBitmap(true);
 
 		TimerTask updateFPS = new TimerTask() {
 			public void run() {
@@ -45,7 +43,6 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
 
 	public void resume() {
 		running = true;
-		renderThread = new Thread(this);
 		renderThread.start();
 	}
 

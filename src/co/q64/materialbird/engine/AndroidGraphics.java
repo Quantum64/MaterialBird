@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +12,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import co.q64.materialbird.framework.Graphics;
-import co.q64.materialbird.framework.Image;
+import co.q64.materialbird.engine.interfaces.Graphics;
+import co.q64.materialbird.engine.interfaces.Image;
 
 public class AndroidGraphics implements Graphics {
 	AssetManager assets;

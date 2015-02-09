@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import java.io.IOException;
 
@@ -7,9 +7,9 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import co.q64.materialbird.framework.Audio;
-import co.q64.materialbird.framework.Music;
-import co.q64.materialbird.framework.Sound;
+import co.q64.materialbird.engine.interfaces.Audio;
+import co.q64.materialbird.engine.interfaces.Music;
+import co.q64.materialbird.engine.interfaces.Sound;
 
 public class AndroidAudio implements Audio {
 	AssetManager assets;

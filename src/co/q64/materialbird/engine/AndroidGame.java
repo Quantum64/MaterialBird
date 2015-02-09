@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,12 +10,12 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
-import co.q64.materialbird.framework.Audio;
-import co.q64.materialbird.framework.FileIO;
-import co.q64.materialbird.framework.Game;
-import co.q64.materialbird.framework.Graphics;
-import co.q64.materialbird.framework.Input;
-import co.q64.materialbird.framework.Screen;
+import co.q64.materialbird.engine.interfaces.Audio;
+import co.q64.materialbird.engine.interfaces.FileIO;
+import co.q64.materialbird.engine.interfaces.Game;
+import co.q64.materialbird.engine.interfaces.Graphics;
+import co.q64.materialbird.engine.interfaces.Input;
+import co.q64.materialbird.engine.interfaces.Screen;
 
 public abstract class AndroidGame extends Activity implements Game {
 	AndroidFastRenderView renderView;

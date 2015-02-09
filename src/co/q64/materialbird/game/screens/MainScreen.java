@@ -3,8 +3,8 @@ package co.q64.materialbird.game.screens;
 import java.util.Random;
 
 import android.graphics.Color;
-import co.q64.materialbird.framework.Game;
-import co.q64.materialbird.framework.Screen;
+import co.q64.materialbird.engine.interfaces.Game;
+import co.q64.materialbird.engine.interfaces.Screen;
 import co.q64.materialbird.game.material.MaterialPane2D;
 import co.q64.materialbird.game.material.elements.MaterialCircle;
 import co.q64.materialbird.game.objects.DynamicElement;

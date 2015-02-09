@@ -1,6 +1,6 @@
-package co.q64.materialbird.framework;
+package co.q64.materialbird.engine.interfaces;
 
-import co.q64.materialbird.framework.Graphics.ImageFormat;
+import co.q64.materialbird.engine.interfaces.Graphics.ImageFormat;
 
 public interface Image {
     public int getWidth();

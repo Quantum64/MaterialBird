@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
-import co.q64.materialbird.framework.Music;
+import co.q64.materialbird.engine.interfaces.Music;
 
 public class AndroidMusic implements Music, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
 	MediaPlayer mediaPlayer;

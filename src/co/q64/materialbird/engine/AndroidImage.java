@@ -1,8 +1,8 @@
-package co.q64.materialbird.framework.implementation;
+package co.q64.materialbird.engine;
 
 import android.graphics.Bitmap;
-import co.q64.materialbird.framework.Graphics.ImageFormat;
-import co.q64.materialbird.framework.Image;
+import co.q64.materialbird.engine.interfaces.Image;
+import co.q64.materialbird.engine.interfaces.Graphics.ImageFormat;
 
 public class AndroidImage implements Image {
 	Bitmap bitmap;

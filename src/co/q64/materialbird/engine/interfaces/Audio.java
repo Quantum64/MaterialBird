@@ -1,4 +1,4 @@
-package co.q64.materialbird.framework;
+package co.q64.materialbird.engine.interfaces;
 
 
 public interface Audio {
