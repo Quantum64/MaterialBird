@@ -3,25 +3,32 @@ package co.q64.materialbird.game.material.elements;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import co.q64.materialbird.game.material.MaterialBase;
+import co.q64.materialbird.game.material.MaterialElement;
 import co.q64.materialbird.game.material.interfaces.Colorable;
-import co.q64.materialbird.game.material.interfaces.Renderable;
 
-public class MaterialCircle extends MaterialBase implements Renderable, Colorable {
+public class MaterialCircle extends MaterialElement implements Colorable {
 
 	private int color = 0;
 	private int radius;
+	private Paint paint;
 
 	public MaterialCircle(Context context, int x, int y, int radius) {
 		super(context, x, y, radius * 2, radius * 2);
 		this.radius = radius;
+		this.paint = new Paint();
 	}
 
 	@Override
 	public void render(Canvas canvas) {
-		Paint paint = new Paint();
 		paint.setColor(color);
 		canvas.drawCircle(getX(), getY(), radius, paint);
+	}
+	
+	@Override
+	public void renderNoOffset(Canvas canvas) {
+		paint.setColor(color);
+		canvas.drawCircle(getRealX(), getRealX(), radius, paint);
+		
 	}
 
 	public void setColor(int color) {

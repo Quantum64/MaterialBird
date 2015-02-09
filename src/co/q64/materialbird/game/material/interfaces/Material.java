@@ -3,7 +3,7 @@ package co.q64.materialbird.game.material.interfaces;
 import android.content.Context;
 
 
-public interface MaterialElement {
+public interface Material {
 
 	public Context getContext();
 	

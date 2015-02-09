@@ -4,4 +4,6 @@ import android.graphics.Canvas;
 
 public interface Renderable {
 	public void render(Canvas canvas);
+	
+	public void renderNoOffset(Canvas canvas);
 }

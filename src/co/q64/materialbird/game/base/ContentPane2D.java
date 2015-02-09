@@ -38,8 +38,8 @@ public class ContentPane2D implements Renderable {
 	public void render(Canvas canvas) {
 		prepareRenderOrder();
 		for (DynamicElement element : elements) {
-			int x = element.getX() + camX;
-			int y = element.getY() + camY;
+			int x = camX;
+			int y = camY;
 			Bitmap bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
 			Canvas rendered = new Canvas(bitmap);
 			element.getObject().render(rendered);
@@ -123,5 +123,10 @@ public class ContentPane2D implements Renderable {
 
 	public int getHeight() {
 		return height;
+	}
+
+	@Override
+	public void renderNoOffset(Canvas canvas) {
+		render(canvas);
 	}
 }

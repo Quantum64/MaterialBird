@@ -8,12 +8,10 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import co.q64.materialbird.game.material.MaterialBase;
+import co.q64.materialbird.game.material.MaterialElement;
 import co.q64.materialbird.game.material.MaterialUtil;
-import co.q64.materialbird.game.material.interfaces.MaterialElement;
-import co.q64.materialbird.game.material.interfaces.Renderable;
 
-public class MaterialLoader extends MaterialBase implements MaterialElement, Renderable {
+public class MaterialLoader extends MaterialElement {
 
 	public MaterialLoader(Context context, int x, int y, int width, int height) {
 		super(context, x, y, width, height);
@@ -48,6 +46,15 @@ public class MaterialLoader extends MaterialBase implements MaterialElement, Ren
 
 	@Override
 	public void render(Canvas canvas) {
+		if (firstAnimationOver == false)
+			drawFirstAnimation(canvas);
+		if (cont > 0)
+			drawSecondAnimation(canvas);
+
+	}
+	
+	@Override
+	public void renderNoOffset(Canvas canvas) { //TODO
 		if (firstAnimationOver == false)
 			drawFirstAnimation(canvas);
 		if (cont > 0)

@@ -21,7 +21,7 @@ public class MainScreen extends Screen {
 			MaterialCircle c = new MaterialCircle(getContext(), r.nextInt(1000), r.nextInt(1000), 100);
 			c.setColor(Color.rgb(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
 			c.setRadius(50);
-			pane.addElement(new DynamicElement("test_c" + i, c, 300, 100, 0));
+			pane.addElement(new DynamicElement("test_c" + i, c, 0));
 		}
 	}
 
@@ -32,7 +32,7 @@ public class MainScreen extends Screen {
 
 	@Override
 	public void paint(float deltaTime) {
-		pane.move(5, 0);
+		pane.move(1, 0);
 		game.getGraphics().drawRect(0, 0, 2000, 2000, Color.WHITE);
 		pane.render(game.getGraphics().getCanvas());
 	}
