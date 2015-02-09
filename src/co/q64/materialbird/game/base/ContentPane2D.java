@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -81,6 +82,7 @@ public class ContentPane2D implements Renderable {
 		return elements;
 	}
 
+	@Deprecated
 	public void prepareRenderOrder() {
 		Collections.sort(elements, new Comparator<DynamicElement>() {
 

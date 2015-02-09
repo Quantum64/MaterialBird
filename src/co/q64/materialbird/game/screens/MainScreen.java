@@ -33,7 +33,7 @@ public class MainScreen extends Screen {
 	@Override
 	public void paint(float deltaTime) {
 		pane.move(1, 0);
-		game.getGraphics().drawRect(0, 0, 2000, 2000, Color.WHITE);
+		game.getGraphics().drawRect(0, 0, 2000, 2000, Color.MAGENTA);
 		pane.render(game.getGraphics().getCanvas());
 	}
 

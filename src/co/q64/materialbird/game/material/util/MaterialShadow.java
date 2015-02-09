@@ -125,6 +125,7 @@ public class MaterialShadow {
 	 *
 	 * @return A new image containing the shadow.
 	 */
+	/*
 	public Bitmap createDropShadow(Bitmap source) {
 		Bitmap subject = Bitmap.createBitmap(source.getWidth() + this.shadowSize * 2, source.getHeight() + this.shadowSize * 2, Bitmap.Config.ARGB_8888);
 
@@ -133,6 +134,7 @@ public class MaterialShadow {
 		applyShadow(subject);
 		return subject;
 	}
+	*/
 
 	/**
 	 * Applies a shadow to the image.
@@ -140,7 +142,7 @@ public class MaterialShadow {
 	 * @param image
 	 *            the image.
 	 */
-	protected void applyShadow(Bitmap image) {
+	protected int[] applyShadow(Bitmap image) {
 		int dstWidth = image.getWidth();
 		int dstHeight = image.getHeight();
 
@@ -223,6 +225,10 @@ public class MaterialShadow {
 				}
 			}
 		}
-		image.setPixels(dataBuffer, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
+		return dataBuffer;
+	}
+
+	public void render(Canvas canvas, Bitmap layerBuffer) {
+		canvas.drawBitmap(applyShadow(layerBuffer), 0, canvas.getWidth(), 0, 0, canvas.getWidth(), canvas.getHeight(), true, null);
 	}
 }
