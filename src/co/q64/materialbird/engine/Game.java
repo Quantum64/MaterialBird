@@ -18,6 +18,9 @@ import co.q64.materialbird.engine.interfaces.IInput;
 import co.q64.materialbird.engine.interfaces.IScreen;
 
 public abstract class Game extends Activity implements IGame {
+	
+	public static final String APPLICATION_NAME = "MaterialBird";
+	
 	GLRenderView renderView;
 	IGraphics graphics;
 	IAudio audio;

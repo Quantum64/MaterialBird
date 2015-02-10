@@ -26,7 +26,7 @@ public class TextIO extends BasicFileIO {
 			}
 			reader.close();
 		} catch (IOException e) {
-			Log.w("MaterialBird", e);
+			Log.w(APPLICATION_NAME, e);
 		}
 		return result.toString();
 	}
