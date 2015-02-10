@@ -7,12 +7,9 @@ import java.io.InputStreamReader;
 
 import android.content.Context;
 import android.util.Log;
+import co.q64.materialbird.engine.Game;
 
 public class TextIO extends BasicFileIO {
-
-	protected TextIO(Context context) {
-		super(context);
-	}
 
 	public String readText(String file) {
 		StringBuilder result = new StringBuilder();
@@ -26,7 +23,7 @@ public class TextIO extends BasicFileIO {
 			}
 			reader.close();
 		} catch (IOException e) {
-			Log.w(APPLICATION_NAME, e);
+			Log.w(Game.APPLICATION_NAME, e);
 		}
 		return result.toString();
 	}

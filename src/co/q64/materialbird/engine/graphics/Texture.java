@@ -17,13 +17,11 @@ public class Texture {
 	private int id;
 
 	public Texture(String name) {
-
+		id = load(name);
 	}
 
 	private int load(String name) {
 		final int[] textureHandle = new int[1];
-		int id = -1;
-		int pixels[];
 
 		try {
 			InputStream in = IOManager.getFileIO().readAsset(name);
@@ -34,7 +32,10 @@ public class Texture {
 			GLES20.glGenTextures(1, textureHandle, 0);
 			if (textureHandle[0] != 0) {
 				GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
+				GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+				GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
 				GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+				GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
 				bitmap.recycle();
 			}
 			if (textureHandle[0] == 0) {
@@ -45,6 +46,19 @@ public class Texture {
 
 		} catch (IOException e) {
 			Log.w(Game.APPLICATION_NAME, e);
+			return 0;
 		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 }

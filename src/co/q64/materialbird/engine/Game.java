@@ -16,6 +16,8 @@ import co.q64.materialbird.engine.interfaces.IGame;
 import co.q64.materialbird.engine.interfaces.IGraphics;
 import co.q64.materialbird.engine.interfaces.IInput;
 import co.q64.materialbird.engine.interfaces.IScreen;
+import co.q64.materialbird.engine.io.IOManager;
+import co.q64.materialbird.engine.shader.Shaders;
 
 public abstract class Game extends Activity implements IGame {
 	
@@ -43,6 +45,9 @@ public abstract class Game extends Activity implements IGame {
 		float scaleX = (float) frameBufferWidth / getWindowManager().getDefaultDisplay().getWidth();
 		float scaleY = (float) frameBufferHeight / getWindowManager().getDefaultDisplay().getHeight();
 
+		IOManager.init(this.getApplicationContext());
+		Shaders.loadAll();
+		
 		renderView = new GLRenderView(this, frameBuffer);
 		graphics = new Graphics(getAssets(), frameBuffer);
 		audio = new Audio(this);

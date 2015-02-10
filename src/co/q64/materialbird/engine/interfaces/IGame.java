@@ -8,8 +8,6 @@ public interface IGame {
 
     public IInput getInput();
 
-    public IFileIO getFileIO();
-
     public IGraphics getGraphics();
 
     public void setScreen(IScreen screen);

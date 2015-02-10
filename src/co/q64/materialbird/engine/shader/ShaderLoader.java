@@ -7,13 +7,13 @@ import android.util.Log;
 
 public class ShaderLoader {
 
-	public int load(String shader) {
+	public static int load(String shader) {
 		String vert = IOManager.getTextIO().readText(shader + ".vert");
 		String frag = IOManager.getTextIO().readText(shader + ".frag");
 		return create(vert, frag);
 	}
 
-	protected int create(String vertex, String fragment) {
+	protected static int create(String vertex, String fragment) {
 		int prog = GLES20.glCreateProgram();
 		int vert = GLES20.glCreateShader(GLES20.GL_VERTEX_SHADER);
 		int frag = GLES20.glCreateShader(GLES20.GL_FRAGMENT_SHADER);
@@ -30,7 +30,7 @@ public class ShaderLoader {
 		return prog;
 	}
 
-	private void validateShader(int id) {
+	private static void validateShader(int id) {
 		int[] compiled = new int[1];
 		GLES20.glGetShaderiv(id, GLES20.GL_COMPILE_STATUS, compiled, 0);
 		if (compiled[0] == 0) {

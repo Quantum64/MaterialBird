@@ -16,16 +16,20 @@ public class IOManager {
 		IOManager.context = context;
 	}
 
+	public static Context getContext() {
+		return context;
+	}
+
 	public static FileIO getFileIO() {
 		if (fileIO == null) {
-			fileIO = new FileIO(context);
+			fileIO = new FileIO();
 		}
 		return fileIO;
 	}
 
 	public static TextIO getTextIO() {
 		if (textIO == null) {
-			textIO = new TextIO(context);
+			textIO = new TextIO();
 		}
 		return textIO;
 	}

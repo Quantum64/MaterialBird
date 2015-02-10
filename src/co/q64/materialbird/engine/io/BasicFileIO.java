@@ -15,12 +15,12 @@ import android.preference.PreferenceManager;
 import co.q64.materialbird.engine.interfaces.IFileIO;
 
 public abstract class BasicFileIO implements IFileIO {
-	private Context context;
+	private static Context context;
 	private AssetManager assets;
 	private String externalStoragePath;
 
-	protected BasicFileIO(Context context) {
-		this.context = context;
+	protected BasicFileIO() {
+		context = IOManager.getContext();
 		this.assets = context.getAssets();
 		this.externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
 	}
