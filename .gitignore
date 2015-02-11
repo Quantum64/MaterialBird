@@ -1,3 +1,13 @@
+#############
+## Custom
+#############
+
+src/org/andengine/*
+
+#############
+## Android
+#############
+
 # Built application files
 *.apk
 *.ap_
