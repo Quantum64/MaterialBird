@@ -46,7 +46,6 @@ public abstract class Game extends Activity implements IGame {
 		float scaleY = (float) frameBufferHeight / getWindowManager().getDefaultDisplay().getHeight();
 
 		IOManager.init(this.getApplicationContext());
-		Shaders.loadAll();
 		
 		renderView = new GLRenderView(this, frameBuffer);
 		graphics = new Graphics(getAssets(), frameBuffer);

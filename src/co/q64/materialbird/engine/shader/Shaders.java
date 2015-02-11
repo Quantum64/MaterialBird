@@ -4,6 +4,6 @@ public class Shaders {
 	public static Shader TEST_SHADER;
 
 	public static void loadAll() {
-		TEST_SHADER = new Shader("test_shader");
+		TEST_SHADER = new Shader();
 	}
 }

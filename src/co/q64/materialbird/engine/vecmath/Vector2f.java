@@ -175,4 +175,8 @@ public class Vector2f extends Tuple2f implements java.io.Serializable {
 		return ((float) (Math.acos(vDot)));
 	}
 
+	public static Vector2f factory(float x, float y) {
+		return new Vector2f(x, y);
+	}
+
 }

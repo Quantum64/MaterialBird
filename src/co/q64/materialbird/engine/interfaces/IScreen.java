@@ -24,4 +24,6 @@ public abstract class IScreen {
 	public abstract void dispose();
 
 	public abstract void backButton();
+	
+	public abstract void init();
 }
