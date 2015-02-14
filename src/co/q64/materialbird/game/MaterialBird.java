@@ -14,7 +14,6 @@ import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.AnimatedSprite;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -27,8 +26,8 @@ import co.q64.materialbird.game.sprite.SpriteXMove;
 
 public class MaterialBird extends ModifiedGameActivity {
 
-	private static int CAMERA_WIDTH;
-	private static int CAMERA_HEIGHT;
+	public static int CAMERA_WIDTH;
+	public static int CAMERA_HEIGHT;
 
 	private Scene scene;
 	private Random random;
@@ -37,7 +36,8 @@ public class MaterialBird extends ModifiedGameActivity {
 
 	private Entity bgLayer;
 	private Map<String, TiledTextureRegion> bgTextures;
-	private List<Sprite> bg;
+	private List<SpriteXMove> bg;
+	private SpriteXMove lastHill;
 
 	public MaterialBird() {
 		random = new Random();
@@ -50,7 +50,7 @@ public class MaterialBird extends ModifiedGameActivity {
 		display.getSize(size);
 		CAMERA_WIDTH = size.x;
 		CAMERA_HEIGHT = size.y;
-		bg = new ArrayList<Sprite>();
+		bg = new ArrayList<SpriteXMove>();
 		bgTextures = new HashMap<String, TiledTextureRegion>();
 		Camera camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		EngineOptions options = new EngineOptions(true, ScreenOrientation.PORTRAIT_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
@@ -68,6 +68,9 @@ public class MaterialBird extends ModifiedGameActivity {
 		bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), 500, 300);
 		bgTextures.put("cloud", BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, "cloud.png", 0, 0, 1, 1));
 		bitmapBuffer.load();
+		bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), 700, 350);
+		bgTextures.put("hill1", BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, "hill1.png", 0, 0, 1, 1));
+		bitmapBuffer.load();
 	}
 
 	@Override
@@ -76,15 +79,20 @@ public class MaterialBird extends ModifiedGameActivity {
 
 		scene = new Scene();
 		scene.setBackground(new Background(0.129f, 0.588f, 0.953f, 1f));
-		
+
 		bgLayer = new Entity();
+		bgLayer.setX(0);
+		bgLayer.setY(0);
 
 		float centerX = (CAMERA_WIDTH - this.playerTextureRegion.getWidth()) / 2;
 		float centerY = (CAMERA_HEIGHT - this.playerTextureRegion.getHeight()) / 2;
 
-		AnimatedSprite player = new AnimatedSprite(centerX, centerY, 200, 200, playerTextureRegion, getVertexBufferObjectManager());
+		AnimatedSprite player = new AnimatedSprite(centerX, centerY, 250, 114, playerTextureRegion, getVertexBufferObjectManager());
 
 		scene.attachChild(bgLayer);
+
+		addHill("hill1", 2f);
+
 		scene.attachChild(player);
 
 		scene.registerUpdateHandler(new Tick(this));
@@ -92,15 +100,22 @@ public class MaterialBird extends ModifiedGameActivity {
 		return scene;
 	}
 
-	public void newBgComponent(String texture) {
-		int y = random.nextInt((int) Math.round(CAMERA_HEIGHT - (CAMERA_HEIGHT / 2.0)));
+	public void newBgComponent(float x, float y, String texture, float speed) {
 		TiledTextureRegion tex = bgTextures.get(texture);
-		AnimatedSprite cloud = new SpriteXMove(CAMERA_WIDTH, y, tex.getWidth(), tex.getHeight(), tex, getVertexBufferObjectManager());
-		bgLayer.attachChild(cloud);
-		bg.add(cloud);
+		SpriteXMove sprite = new SpriteXMove(x, y, tex.getWidth(), tex.getHeight(), tex, getVertexBufferObjectManager(), speed, texture);
+		bgLayer.attachChild(sprite);
+		bg.add(sprite);
 	}
 
-	public List<Sprite> getBgComponents() {
+	public void addHill(String texture, float speed) {
+		TiledTextureRegion tex = bgTextures.get(texture);
+		SpriteXMove sprite = new SpriteXMove(MaterialBird.CAMERA_WIDTH, MaterialBird.CAMERA_HEIGHT - tex.getHeight(), tex.getWidth(), tex.getHeight(), tex, getVertexBufferObjectManager(), speed, texture);
+		bgLayer.attachChild(sprite);
+		bg.add(sprite);
+		lastHill = sprite;
+	}
+
+	public List<SpriteXMove> getBgComponents() {
 		return bg;
 	}
 
@@ -110,5 +125,9 @@ public class MaterialBird extends ModifiedGameActivity {
 
 	public Entity getBg() {
 		return bgLayer;
+	}
+
+	public SpriteXMove getLastHill() {
+		return lastHill;
 	}
 }
