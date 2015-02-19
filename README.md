@@ -1,2 +1,2 @@
 # MaterialBird
-A material design version of Flappy Bird 
+A work in progress material design version of Flappy Bird 
