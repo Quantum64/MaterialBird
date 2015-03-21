@@ -1,6 +1,8 @@
 package co.q64.materialbird.game;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +21,12 @@ import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.Display;
 import co.q64.materialbird.engine.ModifiedGameActivity;
+import co.q64.materialbird.game.listeners.SceneTouchListener;
+import co.q64.materialbird.game.objects.Bird;
 import co.q64.materialbird.game.sprite.SpriteXMove;
 
 public class MaterialBird extends ModifiedGameActivity {
@@ -29,15 +34,21 @@ public class MaterialBird extends ModifiedGameActivity {
 	public static int CAMERA_WIDTH;
 	public static int CAMERA_HEIGHT;
 
+	public static final int HILL_GFX_NUM = 3;
+
 	private Scene scene;
 	private Random random;
 
 	private TiledTextureRegion playerTextureRegion;
 
 	private Entity bgLayer;
+	private Entity hLayer1;
+	private Entity hLayer2;
 	private Map<String, TiledTextureRegion> bgTextures;
 	private List<SpriteXMove> bg;
 	private SpriteXMove lastHill;
+	private boolean paused = false;
+	private Bird bird;
 
 	public MaterialBird() {
 		random = new Random();
@@ -65,12 +76,22 @@ public class MaterialBird extends ModifiedGameActivity {
 		bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), 250, 114);
 		playerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, "bird.png", 0, 0, 1, 1);
 		bitmapBuffer.load();
-		bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), 500, 300);
-		bgTextures.put("cloud", BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, "cloud.png", 0, 0, 1, 1));
-		bitmapBuffer.load();
-		bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), 700, 350);
-		bgTextures.put("hill1", BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, "hill1.png", 0, 0, 1, 1));
-		bitmapBuffer.load();
+		List<String> bgFiles = new ArrayList<String>(Arrays.asList(new String[] { "cloud" }));
+		for (int i = 1; i < MaterialBird.HILL_GFX_NUM + 1; i++) {
+			bgFiles.add("hill" + i);
+		}
+		for (String s : bgFiles) {
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			try {
+				BitmapFactory.decodeStream(this.getApplicationContext().getAssets().open("gfx/" + s + ".png"), null, options);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			bitmapBuffer = new BitmapTextureAtlas(this.getTextureManager(), options.outWidth, options.outHeight);
+			bgTextures.put(s, BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bitmapBuffer, this, s + ".png", 0, 0, 1, 1));
+			bitmapBuffer.load();
+		}
 	}
 
 	@Override
@@ -83,6 +104,14 @@ public class MaterialBird extends ModifiedGameActivity {
 		bgLayer = new Entity();
 		bgLayer.setX(0);
 		bgLayer.setY(0);
+		hLayer1 = new Entity();
+		hLayer1.setX(0);
+		hLayer1.setY(0);
+		hLayer2 = new Entity();
+		hLayer2.setX(0);
+		hLayer2.setY(0);
+		hLayer1.attachChild(hLayer2);
+		bgLayer.attachChild(hLayer1);
 
 		float centerX = (CAMERA_WIDTH - this.playerTextureRegion.getWidth()) / 2;
 		float centerY = (CAMERA_HEIGHT - this.playerTextureRegion.getHeight()) / 2;
@@ -92,10 +121,12 @@ public class MaterialBird extends ModifiedGameActivity {
 		scene.attachChild(bgLayer);
 
 		addHill("hill1", 2f);
+		bird = new Bird(this, player);
 
 		scene.attachChild(player);
-
 		scene.registerUpdateHandler(new Tick(this));
+		scene.registerUpdateHandler(bird);
+		scene.setOnSceneTouchListener(new SceneTouchListener(this));
 
 		return scene;
 	}
@@ -110,7 +141,11 @@ public class MaterialBird extends ModifiedGameActivity {
 	public void addHill(String texture, float speed) {
 		TiledTextureRegion tex = bgTextures.get(texture);
 		SpriteXMove sprite = new SpriteXMove(MaterialBird.CAMERA_WIDTH, MaterialBird.CAMERA_HEIGHT - tex.getHeight(), tex.getWidth(), tex.getHeight(), tex, getVertexBufferObjectManager(), speed, texture);
-		bgLayer.attachChild(sprite);
+		if (random.nextBoolean()) {
+			hLayer1.attachChild(sprite);
+		} else {
+			hLayer2.attachChild(sprite);
+		}
 		bg.add(sprite);
 		lastHill = sprite;
 	}
@@ -129,5 +164,13 @@ public class MaterialBird extends ModifiedGameActivity {
 
 	public SpriteXMove getLastHill() {
 		return lastHill;
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public Bird getBird() {
+		return bird;
 	}
 }

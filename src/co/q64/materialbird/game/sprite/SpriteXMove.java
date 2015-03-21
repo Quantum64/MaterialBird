@@ -28,7 +28,7 @@ public class SpriteXMove extends AnimatedSprite {
 	}
 
 	public float getPxLeft() {
-		return getX() + getWidth() - MaterialBird.CAMERA_WIDTH;
+		return getX() + getWidth() - MaterialBird.CAMERA_WIDTH - /*Shadow padding*/ 70;
 	}
 
 	public String getName() {

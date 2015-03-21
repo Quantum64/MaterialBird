@@ -11,8 +11,6 @@ import co.q64.materialbird.game.sprite.SpriteXMove;
 
 public class Tick implements IUpdateHandler {
 
-	private static final int HILL_GFX_NUM = 1;
-
 	private MaterialBird game;
 	private float time;
 	private float cleanup = 0;
@@ -50,13 +48,13 @@ public class Tick implements IUpdateHandler {
 			checkHill = checkHill + 0.5f;
 			SpriteXMove sprite = game.getLastHill();
 			if (sprite != null) {
-				if (sprite.getPxLeft() < (sprite.getWidth() / 8.0)) {
+				if (sprite.getPxLeft() < (sprite.getWidth() / 2.0)) {
 					if (r.nextInt(3) == 1) {
-						game.addHill("hill" + (r.nextInt(HILL_GFX_NUM) + 1), 2f);
-					}
-				} else {
-					if (sprite.getPxLeft() < (sprite.getWidth() / 16.0)) {
-						game.addHill("hill" + (r.nextInt(HILL_GFX_NUM) + 1), 2f);
+						game.addHill("hill" + (r.nextInt(MaterialBird.HILL_GFX_NUM) + 1), 2f);
+					} else {
+						if (sprite.getPxLeft() < (sprite.getWidth() / 10.0)) {
+							game.addHill("hill" + (r.nextInt(MaterialBird.HILL_GFX_NUM) + 1), 2f);
+						}
 					}
 				}
 			}
