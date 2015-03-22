@@ -48,6 +48,7 @@ public class MaterialBird extends ModifiedGameActivity {
 	private List<SpriteXMove> bg;
 	private SpriteXMove lastHill;
 	private boolean paused = false;
+	private boolean ended = false;
 	private Bird bird;
 
 	public MaterialBird() {
@@ -172,5 +173,14 @@ public class MaterialBird extends ModifiedGameActivity {
 
 	public Bird getBird() {
 		return bird;
+	}
+
+	public void endGame() {
+		paused = true;
+		ended = true;
+	}
+
+	public boolean isEnded() {
+		return ended;
 	}
 }
